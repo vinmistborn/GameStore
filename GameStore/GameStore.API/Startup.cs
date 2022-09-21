@@ -1,3 +1,5 @@
+using FluentValidation.AspNetCore;
+using GameStore.Application;
 using GameStore.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +34,7 @@ namespace GameStore.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GameStore.API", Version = "v1" });
             });
 
+            services.AddApplication();
             services.AddInfrastructure(Configuration);
         }
 
