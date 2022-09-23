@@ -6,5 +6,6 @@ namespace GameStore.Domain.Entities
     {
         public string Name { get; set; }
         public ICollection<GameGenres> GameGenres { get; set; }
+        public ICollection<SubGenre> SubGenres { get; set; }
     }
 }

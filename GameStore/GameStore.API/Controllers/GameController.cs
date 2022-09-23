@@ -11,15 +11,12 @@ namespace GameStore.API.Controllers
 {
     public class GameController : BaseController
     {
-        public GameController(IGameService gameService,
-                              IGameGenresService gameGenresService)
+        public GameController(IGameService gameService)
         {
-            _gameService = gameService;
-            _gameGenresService = gameGenresService;
+            _gameService = gameService;            
         }
 
-        private readonly IGameService _gameService;
-        private readonly IGameGenresService _gameGenresService;
+        private readonly IGameService _gameService;       
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameInfoDTO>>> Get([FromQuery] GameFilterDTO filterParameters)
@@ -54,20 +51,6 @@ namespace GameStore.API.Controllers
         {
             await _gameService.DeleteAsync(id);
             return NoContent();
-        }
-
-        [HttpGet("/gameGenres/{gameId}")]
-        public async Task<ActionResult<IEnumerable<GameGenresInfoDTO>>> GetGameGenres(int gameId)
-        {
-            var gameGenres = await _gameGenresService.GetAllWithSpecificationAsync(new GameGenresFilterByGameIdSpec(gameId));
-            return Ok(gameGenres);
-        }
-
-        [HttpPost("/assignGenres")]
-        public async Task<IActionResult> PostGameGenres(GameGenresDTO gameGenresDTO)
-        {
-            var gameGenres = await _gameGenresService.AddAsync(gameGenresDTO);
-            return Ok(await _gameGenresService.GetInfoWithSpecificationAsync(new GameGenresWithIncludesSpec(gameGenres.Id)));
         }
     }
 }

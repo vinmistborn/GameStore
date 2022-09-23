@@ -19,6 +19,8 @@ namespace GameStore.Application
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGenreService, GenreService>();
             services.AddScoped<IGameGenresService, GameGenresService>();
+            services.AddScoped<ISubGenreService, SubGenreService>();
+            services.AddScoped<IGameSubGenresService, GameSubGenresService>();
 
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<IAssemblyMarker>();

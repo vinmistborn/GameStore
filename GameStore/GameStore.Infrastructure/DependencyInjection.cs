@@ -23,6 +23,10 @@ namespace GameStore.Infrastructure
             services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<IRepositoryBase<GameGenres>, GameGenresRepository>();
             services.AddScoped<IGameGenresRepository, GameGenresRepository>();
+            services.AddScoped<IRepositoryBase<SubGenre>, SubGenreRepository>();
+            services.AddScoped<ISubGenreRepository, SubGenreRepository>();
+            services.AddScoped<IRepositoryBase<GameSubGenres>, GameSubGenreRepository>();
+            services.AddScoped<IGameSubGenresRepository, GameSubGenreRepository>();
 
             return services;
         }
