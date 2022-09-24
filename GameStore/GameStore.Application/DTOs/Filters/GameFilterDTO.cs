@@ -3,6 +3,7 @@
     public class GameFilterDTO
     {
         public int? GenreId { get; set; }
+        public int? SubGenreId { get; set; }
         public string Name { get; set; }
     }
 }

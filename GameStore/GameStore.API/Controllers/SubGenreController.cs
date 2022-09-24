@@ -26,7 +26,7 @@ namespace GameStore.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<SubGenreDTO>> GetById(int id)
         {
-            var genre = await _genreService.GetInfoAsync(id);
+            var genre = await _genreService.GetInfoWithSpecificationAsync(new SubGenreWithIncludesSpec(id));
             return Ok(genre);
         }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameStore.Application.Contracts.Services
 {
-    public interface IGameService : IGenericService<GameDTO, GameInfoDTO, Game>
+    public interface IGameService : IGenericServiceWithSpecification<GameDTO, GameInfoDTO, Game>
     {
        Task<IEnumerable<GameInfoDTO>> GetGamesByFilterParameters(GameFilterDTO filterParameters);
     }
