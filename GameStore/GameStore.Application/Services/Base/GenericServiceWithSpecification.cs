@@ -2,6 +2,7 @@
 using Ardalis.Specification;
 using AutoMapper;
 using GameStore.Application.Contracts.Services.Base;
+using GameStore.Application.Extensions.GuardExtensions;
 using GameStore.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace GameStore.Application.Services.Base
         public async Task<TInfoDto> GetInfoWithSpecificationAsync<Spec>(Spec specification) where Spec : ISpecification<TEntity>
         {
             var entity = await _repository.FirstOrDefaultAsync(specification);
-            Guard.Against.Null(entity, nameof(entity));
+            Guard.Against.NotFoundWithSpec(entity, specification);
 
             return _mapper.Map<TInfoDto>(entity);
         }
