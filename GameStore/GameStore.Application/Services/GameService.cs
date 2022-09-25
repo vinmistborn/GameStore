@@ -11,16 +11,27 @@ using System.Threading.Tasks;
 using System.Linq;
 using System;
 using GameStore.Application.Specifications.GameSpecs;
+using Microsoft.AspNetCore.Http;
+using Ardalis.GuardClauses;
+using GameStore.Application.Extensions.GuardExtensions;
+using GameStore.Application.DTOs.Photo;
 
 namespace GameStore.Application.Services
 {
     public class GameService : GenericServiceWithSpecification<GameDTO, GameInfoDTO, Game>, IGameService
     {
         public GameService(IGameRepository repository,
-                           IMapper mapper)
+                           IMapper mapper,
+                           IPhotoService photoService,
+                           IRepositoryBase<Photo> photoRepository)
                          : base(repository, mapper)
-        {            
+        {
+            _photoService = photoService;
+            _photoRepository = photoRepository;
         }
+
+        private readonly IPhotoService _photoService;
+        private readonly IRepositoryBase<Photo> _photoRepository;
 
         public async Task<IEnumerable<GameInfoDTO>> GetGamesByFilterParameters(GameFilterDTO filterParameters)
         {
@@ -38,6 +49,37 @@ namespace GameStore.Application.Services
         private bool StartsWithFilterName(string name, string filterParameter)
         {
             return name.StartsWith(filterParameter, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public async Task<PhotoDTO> AddPhotoAsync(int gameId, IFormFile file)
+        {
+            var game = await _repository.GetByIdAsync(gameId);
+            Guard.Against.NotFound($"{gameId}", game, "id");
+
+            var result = await _photoService.AddPhotoAsync(file);
+            Guard.Against.ImageErrorFound(result);
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId,
+                GameId = gameId
+            };
+
+            var addedPhoto = await _photoRepository.AddAsync(photo);
+            return _mapper.Map<PhotoDTO>(addedPhoto);
+        }
+
+        public async override Task DeleteAsync(int id)
+        {
+            var game = await _repository.FirstOrDefaultAsync(new GameWithPhotoSpec(id));
+            Guard.Against.NotFound($"{id}", game, "id");
+
+            var photoPublicId = game.Photo.PublicId;
+            await _repository.DeleteAsync(game);
+
+            var result = await _photoService.DeletePhotoAsync(photoPublicId);
+            Guard.Against.ImageErrorFound(result);
         }
     }
 }

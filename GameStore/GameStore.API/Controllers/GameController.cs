@@ -1,8 +1,9 @@
 ﻿using GameStore.Application.Contracts.Services;
 using GameStore.Application.DTOs.Filters;
 using GameStore.Application.DTOs.Game;
-using GameStore.Application.DTOs.GameGenres;
-using GameStore.Application.Specifications.GameGenresSpecs;
+using GameStore.Application.DTOs.Photo;
+using GameStore.Application.Specifications.GameSpecs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace GameStore.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GameInfoDTO>> GetById(int id)
         {
-            var game = await _gameService.GetInfoAsync(id);
+            var game = await _gameService.GetInfoWithSpecificationAsync(new GameWithIncludesSpec(id));
             return Ok(game);
         }
 
@@ -51,6 +52,13 @@ namespace GameStore.API.Controllers
         {
             await _gameService.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpPost("add-photo/{gameId}")]
+        public async Task<ActionResult<PhotoDTO>> AddPhoto(int gameId, IFormFile file)
+        {
+            var photo = await _gameService.AddPhotoAsync(gameId, file);
+            return CreatedAtAction("GetById", new { id = photo.GameId }, photo);
         }
     }
 }

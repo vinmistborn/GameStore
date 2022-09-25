@@ -9,5 +9,6 @@ namespace GameStore.Domain.Entities
         public decimal Price { get; set; }
         public ICollection<GameGenres> GameGenres { get; set; }
         public ICollection<GameSubGenres> GameSubGenres { get; set; }
+        public Photo Photo { get; set; }
     }
 }

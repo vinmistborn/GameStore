@@ -1,5 +1,4 @@
 ﻿using Ardalis.Specification;
-using GameStore.Application.DTOs.Filters;
 using GameStore.Domain.Entities;
 
 namespace GameStore.Application.Specifications.GameSpecs
@@ -9,8 +8,15 @@ namespace GameStore.Application.Specifications.GameSpecs
         public GameWithIncludesSpec()
         {
             Query
+                .Include(p => p.Photo)
                 .Include(p => p.GameGenres)
                 .Include(p => p.GameSubGenres);
+        }
+
+        public GameWithIncludesSpec(int id) : this()
+        {
+            Query
+                .Where(p => p.Id == id);
         }
     }
 }

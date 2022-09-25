@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using GameStore.Domain.Exceptions.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -43,6 +44,7 @@ namespace GameStore.API.Middleware
                     {
                         ArgumentException => (int)HttpStatusCode.BadRequest,
                         NotFoundException => (int)HttpStatusCode.NotFound,
+                        BadRequestBaseException => (int)HttpStatusCode.BadRequest,
                         _ => (int)HttpStatusCode.InternalServerError
                     };
 
