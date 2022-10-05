@@ -8,7 +8,6 @@ namespace GameStore.Application.DTOs.Game
         public string Name { get; set; }
         public string Description { get; set; }
         public string Price { get; set; }
-        public string PhotoUrl { get; set; }
-        public IEnumerable<string> Genres { get; set; }
+        public string PhotoUrl { get; set; }        
     }
 }

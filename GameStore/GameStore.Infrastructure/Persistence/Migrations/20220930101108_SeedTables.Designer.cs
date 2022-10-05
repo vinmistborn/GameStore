@@ -3,14 +3,16 @@ using GameStore.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameStore.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(GameStoreDbContext))]
-    partial class GameStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220930101108_SeedTables")]
+    partial class SeedTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -329,8 +331,8 @@ namespace GameStore.Infrastructure.Persistence.Migrations
                         {
                             Id = 1,
                             GameId = 1,
-                            PublicId = "xjgma6xlxnast2hzyftb",
-                            Url = "https://res.cloudinary.com/dbxbuj4wd/image/upload/v1664134215/xjgma6xlxnast2hzyftb.jpg"
+                            PublicId = "witcher3_fvwqhx",
+                            Url = "https://res.cloudinary.com/dbxbuj4wd/image/upload/v1664553760/witcher3_fvwqhx.jpg"
                         },
                         new
                         {
@@ -343,8 +345,8 @@ namespace GameStore.Infrastructure.Persistence.Migrations
                         {
                             Id = 3,
                             GameId = 3,
-                            PublicId = "lastOfUs_u8wiwy",
-                            Url = "https://res.cloudinary.com/dbxbuj4wd/image/upload/v1664531819/lastOfUs_u8wiwy.jpg"
+                            PublicId = "theLastOfUs_i5pzt2",
+                            Url = "https://res.cloudinary.com/dbxbuj4wd/image/upload/v1664553760/theLastOfUs_i5pzt2.jpg"
                         },
                         new
                         {
@@ -364,8 +366,8 @@ namespace GameStore.Infrastructure.Persistence.Migrations
                         {
                             Id = 6,
                             GameId = 6,
-                            PublicId = "walkingDead_pveeq3",
-                            Url = "https://res.cloudinary.com/dbxbuj4wd/image/upload/v1664531820/walkingDead_pveeq3.jpg"
+                            PublicId = "walkingDeadAlternative_ei6jzz",
+                            Url = "https://res.cloudinary.com/dbxbuj4wd/image/upload/v1664553760/walkingDeadAlternative_ei6jzz.jpg"
                         },
                         new
                         {
@@ -392,8 +394,8 @@ namespace GameStore.Infrastructure.Persistence.Migrations
                         {
                             Id = 10,
                             GameId = 10,
-                            PublicId = "plantsVsZombies_efsn9k",
-                            Url = "https://res.cloudinary.com/dbxbuj4wd/image/upload/v1664531819/plantsVsZombies_efsn9k.jpg"
+                            PublicId = "plantsVsZombies_lcmdic",
+                            Url = "https://res.cloudinary.com/dbxbuj4wd/image/upload/v1664553759/plantsVsZombies_lcmdic.jpg"
                         });
                 });
 

@@ -11,9 +11,7 @@ namespace GameStore.Application.Mappings
             CreateMap<SubGenre, SubGenreDTO>()
                 .ReverseMap();
 
-            CreateMap<SubGenre, SubGenreInfoDTO>()
-                .ForMember(dest => dest.Genre,
-                           src => src.MapFrom(p => p.Genre.Name));
+            CreateMap<SubGenre, SubGenreInfoDTO>();
         }
     }
 }

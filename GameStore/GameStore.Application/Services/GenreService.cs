@@ -1,5 +1,5 @@
-﻿using Ardalis.Specification;
-using AutoMapper;
+﻿using AutoMapper;
+using GameStore.Application.Contracts.Repositories;
 using GameStore.Application.Contracts.Services;
 using GameStore.Application.DTOs.Genre;
 using GameStore.Application.Services.Base;
@@ -9,7 +9,7 @@ namespace GameStore.Application.Services
 {
     public class GenreService : GenericService<GenreDTO, GenreDTO, Genre>, IGenreService
     {
-        public GenreService(IRepositoryBase<Genre> repository,
+        public GenreService(IGenreRepository repository,
                             IMapper mapper)
                           : base(repository, mapper)
         {

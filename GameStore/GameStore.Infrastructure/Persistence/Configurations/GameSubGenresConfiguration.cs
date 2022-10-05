@@ -12,6 +12,39 @@ namespace GameStore.Infrastructure.Persistence.Configurations
                    .IsRequired();
             builder.Property(p => p.SubGenreId)
                    .IsRequired();
+
+            builder.HasData(SeedGameSubGenresEntity());
+        }
+
+        private GameSubGenres[] SeedGameSubGenresEntity()
+        {
+            return new GameSubGenres[]
+            {
+                new GameSubGenres
+                {
+                    Id = 1,
+                    GameId = 1,
+                    SubGenreId = 3
+                },
+                new GameSubGenres
+                {
+                    Id = 2,
+                    GameId = 2,
+                    SubGenreId = 3
+                },
+                new GameSubGenres
+                {
+                    Id = 3,
+                    GameId = 7,
+                    SubGenreId = 4
+                },
+                new GameSubGenres
+                {
+                    Id = 4,
+                    GameId = 3,
+                    SubGenreId = 4
+                }
+            };
         }
     }
 }

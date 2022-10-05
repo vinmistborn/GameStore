@@ -18,13 +18,13 @@ namespace GameStore.Application.Mappings
             CreateMap<GameGenres, GameGenresInfoDTO>()
                     .ForMember(dest => dest.Game,
                                src => src.MapFrom(p => p.Game.Name))
-                    .ForMember(dest => dest.Genre,
-                               src => src.MapFrom(p => p.Genre.Name));                      
+                    .ForMember(dest => dest.Name,
+                               src => src.MapFrom(p => p.Genre.Name));
 
             CreateMap<GameSubGenres, GameGenresInfoDTO>()
                     .ForMember(dest => dest.Game,
                                src => src.MapFrom(p => p.Game.Name))
-                    .ForMember(dest => dest.Genre,
+                    .ForMember(dest => dest.Name,
                                src => src.MapFrom(p => p.SubGenre.Name));
         }
     }

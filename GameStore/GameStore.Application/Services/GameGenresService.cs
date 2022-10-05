@@ -1,4 +1,5 @@
-﻿using Ardalis.Specification;
+﻿using System.Threading.Tasks;
+using Ardalis.Specification;
 using AutoMapper;
 using GameStore.Application.Contracts.Services;
 using GameStore.Application.DTOs.GameGenres;
@@ -13,6 +14,11 @@ namespace GameStore.Application.Services
                                  IMapper mapper)
                                : base(repository, mapper)
         {
+        }
+
+        public async override Task<GameGenresDTO> GetByIdAsync(int id)
+        {
+            
         }
     }
 }

@@ -10,6 +10,7 @@ namespace GameStore.Application.Contracts.Services.Base
     {
         Task<IEnumerable<TInfoDto>> GetAllAsync();
         Task<TInfoDto> GetInfoAsync(int id);
+        Task<TDto> GetByIdAsync(int id);
         Task<TInfoDto> AddAsync(TDto entityDTO);
         Task<TInfoDto> UpdateAsync(int id, TDto entityDTO);
         Task DeleteAsync(int id);

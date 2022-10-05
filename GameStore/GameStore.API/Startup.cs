@@ -31,6 +31,8 @@ namespace GameStore.API
 
             services.AddApplication();
             services.AddInfrastructure(Configuration);
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,9 +46,14 @@ namespace GameStore.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GameStore.API v1"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseHttpsRedirection();            
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials()
+                              .WithOrigins("http://localhost:4200"));
 
             app.UseAuthorization();
 

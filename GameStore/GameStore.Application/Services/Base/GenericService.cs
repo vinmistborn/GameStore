@@ -30,7 +30,7 @@ namespace GameStore.Application.Services.Base
             var entity = _mapper.Map<TEntity>(entityDTO);
             await _repository.AddAsync(entity);
 
-            return await GetByIdAsync(entity.Id);
+            return await GetAsync(entity.Id);
         }
 
         public virtual async Task DeleteAsync(int id)
@@ -53,6 +53,12 @@ namespace GameStore.Application.Services.Base
             return _mapper.Map<TInfoDto>(entity);
         }
 
+        public virtual async Task<TDto> GetByIdAsync(int id)
+        {
+            var entity = await CheckEntityNotNullAsync(id);
+            return _mapper.Map<TDto>(entity);
+        }
+
         public virtual async Task<TInfoDto> UpdateAsync(int id, TDto entityDTO)
         {
             var entity = _mapper.Map<TEntity>(entityDTO);
@@ -61,7 +67,7 @@ namespace GameStore.Application.Services.Base
 
             await _repository.UpdateAsync(entity);
 
-            return await GetByIdAsync(entity.Id);
+            return await GetAsync(entity.Id);
         }
 
         private async Task<TEntity> CheckEntityNotNullAsync(int id)
@@ -72,7 +78,7 @@ namespace GameStore.Application.Services.Base
             return entity;
         }
 
-        private async Task<TInfoDto> GetByIdAsync(int id)
+        private async Task<TInfoDto> GetAsync(int id)
         {
             return _mapper.Map<TInfoDto>(await _repository.GetByIdAsync(id));
         }
