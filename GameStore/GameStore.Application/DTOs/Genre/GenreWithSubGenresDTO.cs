@@ -2,8 +2,8 @@
 
 namespace GameStore.Application.DTOs.Genre
 {
-    public class GenreWithSubGenresDTO : GenreDTO
+    public class GenreWithSubGenresDTO : GenreDto
     {
-        public IEnumerable<SubGenreDTO> SubGenres { get; set; }
+        public IEnumerable<SubGenreDto> SubGenres { get; set; }
     }
 }

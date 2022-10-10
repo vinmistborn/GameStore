@@ -50,7 +50,6 @@ namespace GameStore.API.Middleware
 
                     responseModel.StatusCode = context.Response.StatusCode;
                     responseModel.Message = error.Message;
-                    responseModel.Details = error.StackTrace.ToString();
                 }
 
 

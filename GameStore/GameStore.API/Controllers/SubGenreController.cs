@@ -17,28 +17,28 @@ namespace GameStore.API.Controllers
         private readonly ISubGenreService _genreService;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SubGenreInfoDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<SubGenreInfoDto>>> Get()
         {
             var genres = await _genreService.GetAllAsync();
             return Ok(genres);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<SubGenreDTO>> GetById(int id)
+        public async Task<ActionResult<SubGenreDto>> GetById(int id)
         {
             var genre = await _genreService.GetInfoWithSpecificationAsync(new SubGenreWithIncludesSpec(id));
             return Ok(genre);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(SubGenreDTO genreDTO)
+        public async Task<IActionResult> Post(SubGenreDto genreDTO)
         {
             var genre = await _genreService.AddAsync(genreDTO);
             return Ok(await _genreService.GetInfoWithSpecificationAsync(new SubGenreWithIncludesSpec(genre.Id)));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, SubGenreDTO genreDTO)
+        public async Task<IActionResult> Put(int id, SubGenreDto genreDTO)
         {
             var genre = await _genreService.UpdateAsync(id, genreDTO);
             return Ok(_genreService.GetInfoWithSpecificationAsync(new SubGenreWithIncludesSpec(genre.Id)));

@@ -3,7 +3,7 @@ using GameStore.Application.DTOs.Game;
 
 namespace GameStore.Application.DTOs.Validators
 {
-    public class GameValidator : AbstractValidator<GameDTO>
+    public class GameValidator : AbstractValidator<GameDto>
     {
         public GameValidator()
         {

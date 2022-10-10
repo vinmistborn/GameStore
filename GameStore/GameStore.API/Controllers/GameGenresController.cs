@@ -21,28 +21,28 @@ namespace GameStore.API.Controllers
         private readonly IGameSubGenresService _gameSubGenresService;
 
         [HttpGet("{gameId}")]
-        public async Task<ActionResult<IEnumerable<GameGenresDTO>>> GetGameGenres(int gameId)
+        public async Task<ActionResult<IEnumerable<GameGenresDto>>> GetGameGenres(int gameId)
         {
             var gameGenres = await _gameGenresService.GetInfoWithSpecificationAsync(new GameGenresFilterByGameIdSpec(gameId));           
             return Ok(gameGenres);
         }
 
         [HttpGet("gameSubGenres/{gameId}")]
-        public async Task<ActionResult<IEnumerable<GameGenresDTO>>> GetGameSubGenres(int gameId)
+        public async Task<ActionResult<IEnumerable<GameGenresDto>>> GetGameSubGenres(int gameId)
         {
             var gameSubGenres = await _gameSubGenresService.GetAllWithSpecificationAsync(new GameSubGenresFilterByGameIdSpec(gameId));
             return Ok(gameSubGenres);
         }
 
         [HttpPost("assignGenres")]
-        public async Task<IActionResult> PostGameGenres(GameGenresDTO gameGenresDTO)
+        public async Task<IActionResult> PostGameGenres(GameGenresDto gameGenresDTO)
         {
             var gameGenres = await _gameGenresService.AddAsync(gameGenresDTO);
             return Ok(await _gameGenresService.GetInfoWithSpecificationAsync(new GameGenresWithIncludesSpec(gameGenres.Id)));
         }
 
         [HttpPost("assignSubGenres")]
-        public async Task<IActionResult> PostGameSubGenres(GameSubGenresDTO gameSubGenresDTO)
+        public async Task<IActionResult> PostGameSubGenres(GameSubGenresDto gameSubGenresDTO)
         {
             var gameGenres = await _gameSubGenresService.AddAsync(gameSubGenresDTO);
             return Ok(await _gameSubGenresService.GetInfoWithSpecificationAsync(new GameSubGenresWithIncludesSpec(gameGenres.Id)));

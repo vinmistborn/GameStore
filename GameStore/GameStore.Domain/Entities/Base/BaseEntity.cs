@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace GameStore.Domain.Entities
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public int Id { get; set; }
+    }
+
+    public abstract class BaseGenre : BaseEntity
+    {
+        public string Name { get; set; }
     }
 }

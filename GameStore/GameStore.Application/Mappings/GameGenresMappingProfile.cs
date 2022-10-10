@@ -9,19 +9,19 @@ namespace GameStore.Application.Mappings
     {
         public GameGenresMappingProfile()
         {
-            CreateMap<GameGenres, GameGenresDTO>()
+            CreateMap<GameGenres, GameGenresDto>()
                     .ReverseMap();
 
-            CreateMap<GameSubGenres, GameSubGenresDTO>()
+            CreateMap<GameSubGenres, GameSubGenresDto>()
                     .ReverseMap();
 
-            CreateMap<GameGenres, GameGenresInfoDTO>()
+            CreateMap<GameGenres, GameGenresInfoDto>()
                     .ForMember(dest => dest.Game,
                                src => src.MapFrom(p => p.Game.Name))
                     .ForMember(dest => dest.Name,
                                src => src.MapFrom(p => p.Genre.Name));
 
-            CreateMap<GameSubGenres, GameGenresInfoDTO>()
+            CreateMap<GameSubGenres, GameGenresInfoDto>()
                     .ForMember(dest => dest.Game,
                                src => src.MapFrom(p => p.Game.Name))
                     .ForMember(dest => dest.Name,

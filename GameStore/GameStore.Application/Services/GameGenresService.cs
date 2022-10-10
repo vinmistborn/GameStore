@@ -8,17 +8,12 @@ using GameStore.Domain.Entities;
 
 namespace GameStore.Application.Services
 {
-    public class GameGenresService : GenericServiceWithSpecification<GameGenresDTO, GameGenresInfoDTO, GameGenres>, IGameGenresService
+    public class GameGenresService : GenericServiceWithSpecification<GameGenresDto, GameGenresInfoDto, GameGenres>, IGameGenresService
     {
         public GameGenresService(IRepositoryBase<GameGenres> repository, 
                                  IMapper mapper)
                                : base(repository, mapper)
         {
-        }
-
-        public async override Task<GameGenresDTO> GetByIdAsync(int id)
-        {
-            
         }
     }
 }

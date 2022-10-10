@@ -8,10 +8,10 @@ namespace GameStore.Application.Mappings
     {
         public SubGenreMappingProfile()
         {
-            CreateMap<SubGenre, SubGenreDTO>()
+            CreateMap<SubGenre, SubGenreDto>()
                 .ReverseMap();
 
-            CreateMap<SubGenre, SubGenreInfoDTO>();
+            CreateMap<SubGenre, SubGenreInfoDto>();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace GameStore.Application.DTOs.Game
 {
-    public class GameInfoDTO
+    public class GameInfoDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace GameStore.Application.DTOs.Genre
 {
-    public class SubGenreDTO
+    public class SubGenreDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

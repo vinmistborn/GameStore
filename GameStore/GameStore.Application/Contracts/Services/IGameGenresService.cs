@@ -4,7 +4,7 @@ using GameStore.Domain.Entities;
 
 namespace GameStore.Application.Contracts.Services
 {
-    public interface IGameGenresService : IGenericServiceWithSpecification<GameGenresDTO, GameGenresInfoDTO, GameGenres>
+    public interface IGameGenresService : IGenericServiceWithSpecification<GameGenresDto, GameGenresInfoDto, GameGenres>
     {
     }
 }

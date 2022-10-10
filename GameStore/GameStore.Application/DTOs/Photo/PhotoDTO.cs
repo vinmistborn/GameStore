@@ -1,6 +1,6 @@
 ﻿namespace GameStore.Application.DTOs.Photo
 {
-    public class PhotoDTO
+    public class PhotoDto
     {
         public int Id { get; set; }
         public string Url { get; set; }

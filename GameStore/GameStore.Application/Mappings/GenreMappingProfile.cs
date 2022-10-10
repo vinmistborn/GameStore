@@ -8,7 +8,7 @@ namespace GameStore.Application.Mappings
     {
         public GenreMappingProfile()
         {
-            CreateMap<Genre, GenreDTO>()
+            CreateMap<Genre, GenreDto>()
                     .ReverseMap();
             CreateMap<Genre, GenreWithSubGenresDTO>()
                     .ForMember(dest => dest.SubGenres,

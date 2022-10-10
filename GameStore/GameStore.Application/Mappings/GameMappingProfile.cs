@@ -8,10 +8,10 @@ namespace GameStore.Application.Mappings
     {
         public GameMappingProfile()
         {
-            CreateMap<Game, GameDTO>()
+            CreateMap<Game, GameDto>()
                     .ReverseMap();
 
-            CreateMap<Game, GameInfoDTO>()
+            CreateMap<Game, GameInfoDto>()
                     .ForMember(dest => dest.Price,
                                src => src.MapFrom(p => p.Price.ToString("C")))
                     .ForMember(dest => dest.PhotoUrl,

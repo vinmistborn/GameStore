@@ -21,35 +21,35 @@ namespace GameStore.API.Controllers
         private readonly IGameService _gameService;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GameInfoDTO>>> Get([FromQuery] GameFilterDTO filterParameters)
+        public async Task<ActionResult<IEnumerable<GameInfoDto>>> Get([FromQuery] GameFilterDto filterParameters)
         {
             var games = await _gameService.GetGamesByFilterParameters(filterParameters);
             return Ok(games);
         }
 
         [HttpGet("info/{id}")]
-        public async Task<ActionResult<GameInfoDTO>> GetInfo(int id)
+        public async Task<ActionResult<GameInfoDto>> GetInfo(int id)
         {
             var game = await _gameService.GetInfoWithSpecificationAsync(new GameWithIncludesSpec(id));
             return Ok(game);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GameDTO>> GetById(int id)
+        public async Task<ActionResult<GameDto>> GetById(int id)
         {
             var game = await _gameService.GetByIdAsync(id);
             return Ok(game);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(GameDTO gameDTO)
+        public async Task<IActionResult> Post(GameDto gameDTO)
         {
             var game = await _gameService.AddAsync(gameDTO);
             return CreatedAtAction("GetById", new { id = game.Id }, game);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, GameDTO gameDTO)
+        public async Task<IActionResult> Put(int id, GameDto gameDTO)
         {
             var game = await _gameService.UpdateAsync(id, gameDTO);
             return Ok(game);
@@ -63,14 +63,14 @@ namespace GameStore.API.Controllers
         }
 
         [HttpPost("add-photo/{gameId}")]
-        public async Task<ActionResult<PhotoDTO>> AddPhoto(int gameId, IFormFile file)
+        public async Task<ActionResult<PhotoDto>> AddPhoto(int gameId, IFormFile file)
         {
             var photo = await _gameService.AddPhotoAsync(gameId, file);
             return CreatedAtAction("GetById", new { id = photo.GameId }, photo);
         }
 
         [HttpPut("update-photo/{gameId}")]
-        public async Task<ActionResult<PhotoDTO>> UpdatePhoto(int gameId, IFormFile file)
+        public async Task<ActionResult<PhotoDto>> UpdatePhoto(int gameId, IFormFile file)
         {
             var photo = await _gameService.UpdatePhotoAsync(gameId, file);
             return Ok(photo);

@@ -3,7 +3,7 @@ using GameStore.Application.DTOs.GameGenres.GameSubGenres;
 
 namespace GameStore.Application.DTOs.Validators
 {
-    public class GameSubGenresValidator : AbstractValidator<GameSubGenresDTO>
+    public class GameSubGenresValidator : AbstractValidator<GameSubGenresDto>
     {
         public GameSubGenresValidator()
         {

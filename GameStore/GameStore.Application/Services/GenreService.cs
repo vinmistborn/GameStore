@@ -7,7 +7,7 @@ using GameStore.Domain.Entities;
 
 namespace GameStore.Application.Services
 {
-    public class GenreService : GenericService<GenreDTO, GenreDTO, Genre>, IGenreService
+    public class GenreService : GenericService<GenreDto, GenreDto, Genre>, IGenreService
     {
         public GenreService(IGenreRepository repository,
                             IMapper mapper)

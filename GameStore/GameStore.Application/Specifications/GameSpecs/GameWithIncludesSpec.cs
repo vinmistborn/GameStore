@@ -1,5 +1,6 @@
 ﻿using Ardalis.Specification;
 using GameStore.Domain.Entities;
+using System.Linq;
 
 namespace GameStore.Application.Specifications.GameSpecs
 {

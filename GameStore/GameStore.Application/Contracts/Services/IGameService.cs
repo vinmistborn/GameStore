@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace GameStore.Application.Contracts.Services
 {
-    public interface IGameService : IGenericServiceWithSpecification<GameDTO, GameInfoDTO, Game>
+    public interface IGameService : IGenericServiceWithSpecification<GameDto, GameInfoDto, Game>
     {
-        Task<IEnumerable<GameInfoDTO>> GetGamesByFilterParameters(GameFilterDTO filterParameters);
-        Task<PhotoDTO> AddPhotoAsync(int gameId, IFormFile file);
-        Task<PhotoDTO> UpdatePhotoAsync(int gameId, IFormFile file);
+        Task<IEnumerable<GameInfoDto>> GetGamesByFilterParameters(GameFilterDto filterParameters);
+        Task<PhotoDto> AddPhotoAsync(int gameId, IFormFile file);
+        Task<PhotoDto> UpdatePhotoAsync(int gameId, IFormFile file);
     }
 }

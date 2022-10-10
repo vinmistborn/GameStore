@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameStore.Application.DTOs.GameGenres.GameSubGenres
+﻿namespace GameStore.Application.DTOs.GameGenres.GameSubGenres
 {
-    public class GameSubGenresDTO
+    public class GameSubGenresDto
     {
         public int Id { get; set; }
         public int GameId { get; set; }
