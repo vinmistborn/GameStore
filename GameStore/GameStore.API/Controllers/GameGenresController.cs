@@ -35,16 +35,16 @@ namespace GameStore.API.Controllers
         }
 
         [HttpPost("assignGenres")]
-        public async Task<IActionResult> PostGameGenres(GameGenresDto gameGenresDTO)
+        public async Task<IActionResult> PostGameGenres(GameGenresDto gameGenresDto)
         {
-            var gameGenres = await _gameGenresService.AddAsync(gameGenresDTO);
+            var gameGenres = await _gameGenresService.AddAsync(gameGenresDto);
             return Ok(await _gameGenresService.GetInfoWithSpecificationAsync(new GameGenresWithIncludesSpec(gameGenres.Id)));
         }
 
         [HttpPost("assignSubGenres")]
-        public async Task<IActionResult> PostGameSubGenres(GameSubGenresDto gameSubGenresDTO)
+        public async Task<IActionResult> PostGameSubGenres(GameSubGenresDto gameSubGenresDto)
         {
-            var gameGenres = await _gameSubGenresService.AddAsync(gameSubGenresDTO);
+            var gameGenres = await _gameSubGenresService.AddAsync(gameSubGenresDto);
             return Ok(await _gameSubGenresService.GetInfoWithSpecificationAsync(new GameSubGenresWithIncludesSpec(gameGenres.Id)));
         }
     }

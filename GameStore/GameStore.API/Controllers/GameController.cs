@@ -42,16 +42,16 @@ namespace GameStore.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(GameDto gameDTO)
+        public async Task<IActionResult> Post(GameDto gameDto)
         {
-            var game = await _gameService.AddAsync(gameDTO);
+            var game = await _gameService.AddAsync(gameDto);
             return CreatedAtAction("GetById", new { id = game.Id }, game);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, GameDto gameDTO)
+        public async Task<IActionResult> Put(int id, GameDto gameDto)
         {
-            var game = await _gameService.UpdateAsync(id, gameDTO);
+            var game = await _gameService.UpdateAsync(id, gameDto);
             return Ok(game);
         }
 

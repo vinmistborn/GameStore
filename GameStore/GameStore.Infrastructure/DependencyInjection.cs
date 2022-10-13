@@ -9,6 +9,10 @@ using GameStore.Infrastructure.Services.Photo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using GameStore.Domain.Entities.Identity;
+using GameStore.Infrastructure.Services.Identity;
+using GameStore.Application.Contracts.Services.Identity;
 
 namespace GameStore.Infrastructure
 {
@@ -18,6 +22,18 @@ namespace GameStore.Infrastructure
         {
             services.AddDbContext<GameStoreDbContext>(options =>
                                     options.UseSqlServer(configuration.GetConnectionString("GameStore")));
+
+            services.AddIdentity<User, Role>(options => 
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 9;
+            })
+            .AddEntityFrameworkStores<GameStoreDbContext>()
+            .AddSignInManager<SignInManager<User>>()
+            .AddDefaultTokenProviders();
+
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IIdentityService, IdentityService>();
 
             services.AddScoped<IRepositoryBase<Game>, GameRepository>();
             services.AddScoped<IGameRepository, GameRepository>();

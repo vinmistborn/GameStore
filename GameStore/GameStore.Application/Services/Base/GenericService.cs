@@ -23,11 +23,11 @@ namespace GameStore.Application.Services.Base
         protected readonly IRepositoryBase<TEntity> _repository;
         protected readonly IMapper _mapper;
 
-        public virtual async Task<TInfoDto> AddAsync(TDto entityDTO)
+        public virtual async Task<TInfoDto> AddAsync(TDto entityDto)
         {
-            Guard.Against.Null(entityDTO, nameof(entityDTO));
+            Guard.Against.Null(entityDto, nameof(entityDto));
 
-            var entity = _mapper.Map<TEntity>(entityDTO);
+            var entity = _mapper.Map<TEntity>(entityDto);
             await _repository.AddAsync(entity);
 
             return await GetAsync(entity.Id);
@@ -59,9 +59,9 @@ namespace GameStore.Application.Services.Base
             return _mapper.Map<TDto>(entity);
         }
 
-        public virtual async Task<TInfoDto> UpdateAsync(int id, TDto entityDTO)
+        public virtual async Task<TInfoDto> UpdateAsync(int id, TDto entityDto)
         {
-            var entity = _mapper.Map<TEntity>(entityDTO);
+            var entity = _mapper.Map<TEntity>(entityDto);
 
             Guard.Against.NotEqualIds(id, entity);
 

@@ -31,16 +31,16 @@ namespace GameStore.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(SubGenreDto genreDTO)
+        public async Task<IActionResult> Post(SubGenreDto genreDto)
         {
-            var genre = await _genreService.AddAsync(genreDTO);
+            var genre = await _genreService.AddAsync(genreDto);
             return Ok(await _genreService.GetInfoWithSpecificationAsync(new SubGenreWithIncludesSpec(genre.Id)));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, SubGenreDto genreDTO)
+        public async Task<IActionResult> Put(int id, SubGenreDto genreDto)
         {
-            var genre = await _genreService.UpdateAsync(id, genreDTO);
+            var genre = await _genreService.UpdateAsync(id, genreDto);
             return Ok(_genreService.GetInfoWithSpecificationAsync(new SubGenreWithIncludesSpec(genre.Id)));
         }
 

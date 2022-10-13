@@ -45,6 +45,7 @@ namespace GameStore.API.Middleware
                         ArgumentException => (int)HttpStatusCode.BadRequest,
                         NotFoundException => (int)HttpStatusCode.NotFound,
                         BadRequestBaseException => (int)HttpStatusCode.BadRequest,
+                        UnauthorizedBaseException => (int)HttpStatusCode.Unauthorized,
                         _ => (int)HttpStatusCode.InternalServerError
                     };
 
