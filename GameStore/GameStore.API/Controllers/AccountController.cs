@@ -1,7 +1,6 @@
 ﻿using GameStore.Application.Contracts.Services.Identity;
 using GameStore.Application.DTOs.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GameStore.API.Controllers

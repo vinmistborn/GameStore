@@ -15,8 +15,6 @@ using GameStore.Application.Extensions.GuardExtensions;
 using GameStore.Application.DTOs.Photo;
 using GameStore.Application.Specifications.PhotoSpecs;
 using CloudinaryDotNet.Actions;
-using System.Linq;
-using System;
 
 namespace GameStore.Application.Services
 {
@@ -41,7 +39,7 @@ namespace GameStore.Application.Services
             return _mapper.Map<IEnumerable<GameInfoDto>>(games);
         }
         
-        public async Task<PhotoDto> AddPhotoAsync(int gameId, IFormFile file)
+        public async Task<GamePhotoDto> AddPhotoAsync(int gameId, IFormFile file)
         {
             var game = await _repository.GetByIdAsync(gameId);
             Guard.Against.NotFound($"{gameId}", game, "id");
@@ -56,10 +54,10 @@ namespace GameStore.Application.Services
             };
 
             var addedPhoto = await _photoRepository.AddAsync(photo);
-            return _mapper.Map<PhotoDto>(addedPhoto);
+            return _mapper.Map<GamePhotoDto>(addedPhoto);
         }
         
-        public async Task<PhotoDto> UpdatePhotoAsync(int gameId, IFormFile file)
+        public async Task<GamePhotoDto> UpdatePhotoAsync(int gameId, IFormFile file)
         {
             var photo = await _photoRepository.FirstOrDefaultAsync(new PhotoWithGameSpec(gameId));
             Guard.Against.NotFound($"{gameId}", photo, "gameId");
@@ -72,7 +70,7 @@ namespace GameStore.Application.Services
             photo.PublicId = newPhoto.PublicId;
 
             await _photoRepository.SaveChangesAsync();
-            return _mapper.Map<PhotoDto>(photo);
+            return _mapper.Map<GamePhotoDto>(photo);
         }
 
         public async override Task DeleteAsync(int id)

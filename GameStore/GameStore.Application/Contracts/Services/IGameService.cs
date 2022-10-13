@@ -12,7 +12,7 @@ namespace GameStore.Application.Contracts.Services
     public interface IGameService : IGenericServiceWithSpecification<GameDto, GameInfoDto, Game>
     {
         Task<IEnumerable<GameInfoDto>> GetGamesByFilterParameters(GameFilterDto filterParameters);
-        Task<PhotoDto> AddPhotoAsync(int gameId, IFormFile file);
-        Task<PhotoDto> UpdatePhotoAsync(int gameId, IFormFile file);
+        Task<GamePhotoDto> AddPhotoAsync(int gameId, IFormFile file);
+        Task<GamePhotoDto> UpdatePhotoAsync(int gameId, IFormFile file);
     }
 }

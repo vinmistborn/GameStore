@@ -34,6 +34,7 @@ namespace GameStore.Infrastructure
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IRepositoryBase<Game>, GameRepository>();
             services.AddScoped<IGameRepository, GameRepository>();
@@ -46,6 +47,7 @@ namespace GameStore.Infrastructure
             services.AddScoped<IRepositoryBase<GameSubGenres>, GameSubGenreRepository>();
             services.AddScoped<IGameSubGenresRepository, GameSubGenreRepository>();
             services.AddScoped<IRepositoryBase<Photo>, PhotoRepository>();
+            services.AddScoped<IRepositoryBase<UserPhoto>, UserPhotoRepository>();
 
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();

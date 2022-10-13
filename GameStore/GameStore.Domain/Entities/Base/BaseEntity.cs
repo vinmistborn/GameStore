@@ -10,9 +10,4 @@ namespace GameStore.Domain.Entities
     {
         public int Id { get; set; }
     }
-
-    public abstract class BaseGenre : BaseEntity
-    {
-        public string Name { get; set; }
-    }
 }

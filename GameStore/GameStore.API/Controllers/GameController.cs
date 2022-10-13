@@ -63,14 +63,14 @@ namespace GameStore.API.Controllers
         }
 
         [HttpPost("add-photo/{gameId}")]
-        public async Task<ActionResult<PhotoDto>> AddPhoto(int gameId, IFormFile file)
+        public async Task<ActionResult<GamePhotoDto>> AddPhoto(int gameId, IFormFile file)
         {
             var photo = await _gameService.AddPhotoAsync(gameId, file);
             return CreatedAtAction("GetById", new { id = photo.GameId }, photo);
         }
 
         [HttpPut("update-photo/{gameId}")]
-        public async Task<ActionResult<PhotoDto>> UpdatePhoto(int gameId, IFormFile file)
+        public async Task<ActionResult<GamePhotoDto>> UpdatePhoto(int gameId, IFormFile file)
         {
             var photo = await _gameService.UpdatePhotoAsync(gameId, file);
             return Ok(photo);

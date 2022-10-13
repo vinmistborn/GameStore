@@ -1,9 +1,9 @@
-﻿namespace GameStore.Domain.Entities
+﻿using GameStore.Domain.Entities.Base;
+
+namespace GameStore.Domain.Entities
 {
-    public class Photo : BaseEntity
+    public class Photo : BasePhoto
     {
-        public string Url { get; set; }
-        public string PublicId { get; set; }
         public int GameId { get; set; }
         public Game Game { get; set; }
     }

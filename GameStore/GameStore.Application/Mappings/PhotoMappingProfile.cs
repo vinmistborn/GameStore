@@ -8,7 +8,9 @@ namespace GameStore.Application.Mappings
     {
         public PhotoMappingProfile()
         {
-            CreateMap<Photo, PhotoDto>();
+            CreateMap<Photo, GamePhotoDto>();
+
+            CreateMap<UserPhoto, UserPhotoDto>();
         }
     }
 }
