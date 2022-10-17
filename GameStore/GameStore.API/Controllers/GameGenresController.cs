@@ -21,14 +21,14 @@ namespace GameStore.API.Controllers
         private readonly IGameSubGenresService _gameSubGenresService;
 
         [HttpGet("{gameId}")]
-        public async Task<ActionResult<IEnumerable<GameGenresDto>>> GetGameGenres(int gameId)
+        public async Task<ActionResult<IEnumerable<GameGenresInfoDto>>> GetGameGenres(int gameId)
         {
-            var gameGenres = await _gameGenresService.GetInfoWithSpecificationAsync(new GameGenresFilterByGameIdSpec(gameId));           
+            var gameGenres = await _gameGenresService.GetAllWithSpecificationAsync(new GameGenresFilterByGameIdSpec(gameId));           
             return Ok(gameGenres);
         }
 
         [HttpGet("gameSubGenres/{gameId}")]
-        public async Task<ActionResult<IEnumerable<GameGenresDto>>> GetGameSubGenres(int gameId)
+        public async Task<ActionResult<IEnumerable<GameGenresInfoDto>>> GetGameSubGenres(int gameId)
         {
             var gameSubGenres = await _gameSubGenresService.GetAllWithSpecificationAsync(new GameSubGenresFilterByGameIdSpec(gameId));
             return Ok(gameSubGenres);

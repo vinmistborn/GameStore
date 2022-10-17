@@ -9,14 +9,14 @@ using GameStore.Application.Extensions.GuardExtensions;
 
 namespace GameStore.Infrastructure.Services.Identity
 {
-    public class IdentityService : IIdentityService
+    public class AccountService : IAccountService
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
-        public IdentityService(UserManager<User> userManager,
+        public AccountService(UserManager<User> userManager,
                                SignInManager<User> signInManager,
                                ITokenService tokenService,
                                IMapper mapper)

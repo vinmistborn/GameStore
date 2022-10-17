@@ -7,8 +7,8 @@ namespace GameStore.API.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly IIdentityService _identityService;
-        public AccountController(IIdentityService identityService)
+        private readonly IAccountService _identityService;
+        public AccountController(IAccountService identityService)
         {
             _identityService = identityService;
         }

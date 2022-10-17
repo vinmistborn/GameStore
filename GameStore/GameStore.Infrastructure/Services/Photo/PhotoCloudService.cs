@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace GameStore.Infrastructure.Services.Photo
 {
-    public class PhotoService : IPhotoService
+    public class PhotoCloudService : IPhotoCloudService
     {
-        public PhotoService(IOptions<CloudinarySettings> config)
+        public PhotoCloudService(IOptions<CloudinarySettings> config)
         {
             var account = new Account
             (

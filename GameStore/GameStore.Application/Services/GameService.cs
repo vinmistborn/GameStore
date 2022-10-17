@@ -22,7 +22,7 @@ namespace GameStore.Application.Services
     {
         public GameService(IGameRepository repository,
                            IMapper mapper,
-                           IPhotoService photoService,
+                           IPhotoCloudService photoService,
                            IRepositoryBase<Photo> photoRepository)
                          : base(repository, mapper)
         {
@@ -30,7 +30,7 @@ namespace GameStore.Application.Services
             _photoRepository = photoRepository;
         }
 
-        private readonly IPhotoService _photoService;
+        private readonly IPhotoCloudService _photoService;
         private readonly IRepositoryBase<Photo> _photoRepository;
 
         public async Task<IEnumerable<GameInfoDto>> GetGamesByFilterParameters(GameFilterDto filterParameters)

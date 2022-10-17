@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GameStore.Application.Contracts.Services.Identity
 {
-    public interface IIdentityService
+    public interface IAccountService
     {
         Task<UserDto> RegisterUserAsync(RegisterDto registerDto);
         Task<UserDto> LoginUserAsync(LoginDto loginDto);

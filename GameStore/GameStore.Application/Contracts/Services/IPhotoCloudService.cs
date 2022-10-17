@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace GameStore.Application.Contracts.Services
 {
-    public interface IPhotoService
+    public interface IPhotoCloudService
     {
         Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
         Task<DeletionResult> DeletePhotoAsync(string publicId);

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Ardalis.Specification;
+﻿using Ardalis.Specification;
 using AutoMapper;
 using GameStore.Application.Contracts.Services;
 using GameStore.Application.DTOs.GameGenres;

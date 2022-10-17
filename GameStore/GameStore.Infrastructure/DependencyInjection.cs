@@ -13,12 +13,15 @@ using Microsoft.AspNetCore.Identity;
 using GameStore.Domain.Entities.Identity;
 using GameStore.Infrastructure.Services.Identity;
 using GameStore.Application.Contracts.Services.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace GameStore.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<GameStoreDbContext>(options =>
                                     options.UseSqlServer(configuration.GetConnectionString("GameStore")));
@@ -33,8 +36,22 @@ namespace GameStore.Infrastructure
             .AddDefaultTokenProviders();
 
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserService, UserService>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"])),
+                        ValidIssuer = configuration["JwtSettings:Issuer"],
+                        ValidAudience = configuration["JwtSettings:Audience"],
+                        ValidateIssuer = true,
+                        ValidateAudience = true
+                    };
+                });
 
             services.AddScoped<IRepositoryBase<Game>, GameRepository>();
             services.AddScoped<IGameRepository, GameRepository>();
@@ -50,7 +67,7 @@ namespace GameStore.Infrastructure
             services.AddScoped<IRepositoryBase<UserPhoto>, UserPhotoRepository>();
 
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
-            services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IPhotoCloudService, PhotoCloudService>();
             
             return services;
         }

@@ -1,5 +1,7 @@
 ﻿using GameStore.Application.Contracts.Services.Identity;
+using GameStore.Application.DTOs.Identity;
 using GameStore.Application.DTOs.Photo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -13,6 +15,14 @@ namespace GameStore.API.Controllers
         public UserController(IUserService userService)
         {
             _userService = userService;
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var user = await _userService.GetCurrentUserAsync();
+            return Ok(user);
         }
 
         [HttpPost("add-photo/{userId}")]
