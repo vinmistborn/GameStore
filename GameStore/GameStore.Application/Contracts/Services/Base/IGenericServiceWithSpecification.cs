@@ -11,6 +11,6 @@ namespace GameStore.Application.Contracts.Services.Base
                                                                where TEntity : BaseEntity
     {
         Task<IEnumerable<TInfoDto>> GetAllWithSpecificationAsync(Specification<TEntity> specification);
-        Task<TInfoDto> GetInfoWithSpecificationAsync<Spec>(Spec specification) where Spec : ISpecification<TEntity>;
+        Task<TInfoDto> GetInfoWithSpecificationAsync(Specification<TEntity> specification);
     }
 }

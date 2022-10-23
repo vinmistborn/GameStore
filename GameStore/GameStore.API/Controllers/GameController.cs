@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using GameStore.Application.Contracts.Services;
+﻿using GameStore.Application.Contracts.Services;
 using GameStore.Application.DTOs.Filters;
 using GameStore.Application.DTOs.Game;
 using GameStore.Application.DTOs.Photo;
@@ -8,9 +7,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameStore.API.Controllers
 {
+    [Authorize]
     public class GameController : BaseController
     {
         public GameController(IGameService gameService)
@@ -20,6 +21,7 @@ namespace GameStore.API.Controllers
 
         private readonly IGameService _gameService;
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameInfoDto>>> Get([FromQuery] GameFilterDto filterParameters)
         {
@@ -27,6 +29,7 @@ namespace GameStore.API.Controllers
             return Ok(games);
         }
 
+        [AllowAnonymous]
         [HttpGet("info/{id}")]
         public async Task<ActionResult<GameInfoDto>> GetInfo(int id)
         {

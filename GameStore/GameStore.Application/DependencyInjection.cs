@@ -3,8 +3,11 @@ using FluentValidation.AspNetCore;
 using GameStore.Application.Common;
 using GameStore.Application.Contracts.Services;
 using GameStore.Application.Contracts.Services.Base;
+using GameStore.Application.DTOs.Comment;
+using GameStore.Application.DTOs.Comment.SubComment;
 using GameStore.Application.Services;
 using GameStore.Application.Services.Base;
+using GameStore.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -21,6 +24,10 @@ namespace GameStore.Application
             services.AddScoped<IGameGenresService, GameGenresService>();
             services.AddScoped<ISubGenreService, SubGenreService>();
             services.AddScoped<IGameSubGenresService, GameSubGenresService>();
+            services.AddScoped<IBaseCommentService<CommentDto, CommentInfoDto, Comment>, CommentService>();
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ISubCommentService, SubCommentService>();
+            services.AddScoped<IBaseCommentService<SubCommentDto, SubCommentInfoDto, SubComment>, SubCommentService>();
 
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<IAssemblyMarker>();

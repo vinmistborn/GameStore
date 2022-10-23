@@ -1,6 +1,8 @@
 using GameStore.API.Middleware;
 using GameStore.Application;
+using GameStore.Application.Services.BackgroundJobs;
 using GameStore.Infrastructure;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +23,7 @@ namespace GameStore.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebApiServices();
+            services.AddWebApiServices(Configuration);
             services.AddApplicationServices();
             services.AddInfrastructureServices(Configuration);
         }
@@ -36,6 +38,9 @@ namespace GameStore.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GameStore.API v1"));
             }
+
+            app.UseHangfireDashboard("/dashboard");
+            CommentRecurrentJobs.RegisterCommentRecurrentJobs();
 
             app.UseHttpsRedirection();
 

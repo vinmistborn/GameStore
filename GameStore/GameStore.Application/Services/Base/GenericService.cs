@@ -61,13 +61,13 @@ namespace GameStore.Application.Services.Base
 
         public virtual async Task<TInfoDto> UpdateAsync(int id, TDto entityDto)
         {
-            var entity = _mapper.Map<TEntity>(entityDto);
-
+            var entity = await CheckEntityNotNullAsync(id);
             Guard.Against.NotEqualIds(id, entity);
 
-            await _repository.UpdateAsync(entity);
+            var updatedComment = _mapper.Map(entityDto, entity);
+            await _repository.UpdateAsync(updatedComment);
 
-            return await GetAsync(entity.Id);
+            return await GetAsync(id);
         }
 
         private async Task<TEntity> CheckEntityNotNullAsync(int id)
@@ -78,7 +78,7 @@ namespace GameStore.Application.Services.Base
             return entity;
         }
 
-        private async Task<TInfoDto> GetAsync(int id)
+        protected async Task<TInfoDto> GetAsync(int id)
         {
             return _mapper.Map<TInfoDto>(await _repository.GetByIdAsync(id));
         }

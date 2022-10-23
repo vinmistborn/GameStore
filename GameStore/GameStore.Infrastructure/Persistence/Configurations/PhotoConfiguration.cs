@@ -1,4 +1,5 @@
 ﻿using GameStore.Domain.Entities;
+using GameStore.Infrastructure.Persistence.Configurations.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,10 +9,7 @@ namespace GameStore.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Photo> builder)
         {
-            builder.Property(p => p.PublicId)
-                   .IsRequired();
-            builder.Property(p => p.Url)
-                   .IsRequired();
+            builder.ConfigureCommonPhotoProperties();
             builder.Property(p => p.GameId)
                    .IsRequired();
 

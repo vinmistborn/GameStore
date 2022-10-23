@@ -16,6 +16,7 @@ using GameStore.Application.Contracts.Services.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using GameStore.Infrastructure.Persistence.Interceptors;
 
 namespace GameStore.Infrastructure
 {
@@ -23,8 +24,14 @@ namespace GameStore.Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<GameStoreDbContext>(options =>
-                                    options.UseSqlServer(configuration.GetConnectionString("GameStore")));
+            services.AddScoped<UpdateAuditableEntitiesInterceptor>();
+
+            services.AddDbContext<GameStoreDbContext>((sp, options) =>
+            {
+                var interceptor = sp.GetService<UpdateAuditableEntitiesInterceptor>();
+                options.UseSqlServer(configuration.GetConnectionString("GameStore"))
+                       .AddInterceptors(interceptor);
+            });
 
             services.AddIdentity<User, Role>(options => 
             {
@@ -65,6 +72,10 @@ namespace GameStore.Infrastructure
             services.AddScoped<IGameSubGenresRepository, GameSubGenreRepository>();
             services.AddScoped<IRepositoryBase<Photo>, PhotoRepository>();
             services.AddScoped<IRepositoryBase<UserPhoto>, UserPhotoRepository>();
+            services.AddScoped<IReadRepositoryBase<Comment>, CommentRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IReadRepositoryBase<SubComment>, SubCommentRepository>();
+            services.AddScoped<ISubCommentRepository, SubCommentRepository>();
 
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoCloudService, PhotoCloudService>();

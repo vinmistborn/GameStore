@@ -27,7 +27,7 @@ namespace GameStore.Application.Services.Base
             return _mapper.Map<IEnumerable<TInfoDto>>(entities);
         }
                 
-        public async Task<TInfoDto> GetInfoWithSpecificationAsync<Spec>(Spec specification) where Spec : ISpecification<TEntity>
+        public async Task<TInfoDto> GetInfoWithSpecificationAsync(Specification<TEntity> specification)
         {
             var entity = await _repository.FirstOrDefaultAsync(specification);
             Guard.Against.NotFoundWithSpec(entity, specification);

@@ -1,4 +1,5 @@
 ﻿using GameStore.Domain.Entities;
+using GameStore.Infrastructure.Persistence.Configurations.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,8 +9,7 @@ namespace GameStore.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<GameSubGenres> builder)
         {
-            builder.Property(p => p.GameId)
-                   .IsRequired();
+            builder.ConfigureCommonGameGenresProperties();
             builder.Property(p => p.SubGenreId)
                    .IsRequired();
 

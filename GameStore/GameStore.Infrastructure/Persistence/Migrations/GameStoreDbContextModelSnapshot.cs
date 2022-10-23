@@ -19,6 +19,42 @@ namespace GameStore.Infrastructure.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("GameStore.Domain.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("GameStore.Domain.Entities.Game", b =>
                 {
                     b.Property<int>("Id")
@@ -500,6 +536,42 @@ namespace GameStore.Infrastructure.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("GameStore.Domain.Entities.SubComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("SubComments");
+                });
+
             modelBuilder.Entity("GameStore.Domain.Entities.SubGenre", b =>
                 {
                     b.Property<int>("Id")
@@ -674,6 +746,17 @@ namespace GameStore.Infrastructure.Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("GameStore.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("GameStore.Domain.Entities.Game", "Game")
+                        .WithMany("Comments")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+                });
+
             modelBuilder.Entity("GameStore.Domain.Entities.GameGenres", b =>
                 {
                     b.HasOne("GameStore.Domain.Entities.Game", "Game")
@@ -721,6 +804,17 @@ namespace GameStore.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("GameStore.Domain.Entities.SubComment", b =>
+                {
+                    b.HasOne("GameStore.Domain.Entities.Comment", "Comment")
+                        .WithMany("SubComments")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
                 });
 
             modelBuilder.Entity("GameStore.Domain.Entities.SubGenre", b =>
@@ -796,8 +890,15 @@ namespace GameStore.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("GameStore.Domain.Entities.Comment", b =>
+                {
+                    b.Navigation("SubComments");
+                });
+
             modelBuilder.Entity("GameStore.Domain.Entities.Game", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("GameGenres");
 
                     b.Navigation("GameSubGenres");

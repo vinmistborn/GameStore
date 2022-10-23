@@ -15,7 +15,9 @@ namespace GameStore.Application.Mappings
                     .ForMember(dest => dest.Price,
                                src => src.MapFrom(p => p.Price.ToString("C")))
                     .ForMember(dest => dest.PhotoUrl,
-                               src => src.MapFrom(p => p.Photo != null ? p.Photo.Url : ""));                    
+                               src => src.MapFrom(p => p.Photo != null ? p.Photo.Url : ""));
+
+            CreateMap<Game, GameWithCommentsDto>();
         }
     }
 }

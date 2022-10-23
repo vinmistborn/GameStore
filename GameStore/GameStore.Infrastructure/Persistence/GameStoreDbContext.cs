@@ -19,6 +19,8 @@ namespace GameStore.Infrastructure.Persistence
         public DbSet<GameSubGenres> GameSubGenres { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<UserPhoto> UserPhotos { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<SubComment> SubComments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

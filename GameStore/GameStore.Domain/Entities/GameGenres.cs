@@ -1,8 +1,9 @@
-﻿namespace GameStore.Domain.Entities
+﻿using GameStore.Domain.Entities.Base;
+
+namespace GameStore.Domain.Entities
 {
-    public class GameGenres : BaseEntity
+    public class GameGenres : BaseGameGenres
     {
-        public int GameId { get; set; }
         public int GenreId { get; set; }
         public Game Game { get; set; }
         public Genre Genre { get; set; }

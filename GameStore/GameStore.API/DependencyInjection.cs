@@ -1,5 +1,7 @@
 ﻿using GameStore.API.Services;
 using GameStore.Application.Contracts.Services.Identity;
+using Hangfire;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -7,7 +9,7 @@ namespace GameStore.API
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddWebApiServices(this IServiceCollection services)
+        public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -42,6 +44,9 @@ namespace GameStore.API
             services.AddHttpContextAccessor();
 
             services.AddCors();
+
+            services.AddHangfire(x => x.UseSqlServerStorage(configuration.GetConnectionString("GameStore")));
+            services.AddHangfireServer();
 
             return services;
         }
