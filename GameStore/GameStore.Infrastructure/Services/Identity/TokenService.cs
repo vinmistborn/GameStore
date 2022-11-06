@@ -29,7 +29,7 @@ namespace GameStore.Infrastructure.Services.Identity
             var tokenDescriptor = new JwtSecurityToken(
                 issuer: _config["JwtSettings:Issuer"],
                 audience: _config["JwtSettings:Audience"],
-                claims: await GetClaims(user),
+                claims: await GetClaimsAsync(user),
                 expires: DateTime.Now.AddDays(double.Parse(_config["JwtSettings:ExpirationTimeInDays"])),
                 signingCredentials: GetSigningCredentials());
 
@@ -44,7 +44,7 @@ namespace GameStore.Infrastructure.Services.Identity
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        private async Task<List<Claim>> GetClaims(User user) 
+        private async Task<List<Claim>> GetClaimsAsync(User user) 
         {
             var claims = new List<Claim>
             {

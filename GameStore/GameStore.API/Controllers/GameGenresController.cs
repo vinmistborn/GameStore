@@ -3,12 +3,14 @@ using GameStore.Application.DTOs.GameGenres;
 using GameStore.Application.DTOs.GameGenres.GameSubGenres;
 using GameStore.Application.Specifications.GameGenresSpecs;
 using GameStore.Application.Specifications.GameGenresSpecs.GameSubGenresSpecs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GameStore.API.Controllers
 {
+    [Authorize]
     public class GameGenresController : BaseController
     {       
         public GameGenresController(IGameGenresService gameGenresService, IGameSubGenresService gameSubGenresService)

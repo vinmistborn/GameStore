@@ -12,8 +12,6 @@ namespace GameStore.Application.Mappings
                     .ReverseMap();
 
             CreateMap<Game, GameInfoDto>()
-                    .ForMember(dest => dest.Price,
-                               src => src.MapFrom(p => p.Price.ToString("C")))
                     .ForMember(dest => dest.PhotoUrl,
                                src => src.MapFrom(p => p.Photo != null ? p.Photo.Url : ""));
 

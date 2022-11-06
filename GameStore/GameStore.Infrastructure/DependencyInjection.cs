@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using GameStore.Infrastructure.Persistence.Interceptors;
+using StackExchange.Redis;
 
 namespace GameStore.Infrastructure
 {
@@ -33,7 +34,14 @@ namespace GameStore.Infrastructure
                        .AddInterceptors(interceptor);
             });
 
-            services.AddIdentity<User, Role>(options => 
+            services.AddSingleton<IConnectionMultiplexer>(c => 
+            {
+                var config = ConfigurationOptions.Parse(configuration
+                      .GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(config);
+            });
+
+            services.AddIdentity<User, Domain.Entities.Identity.Role>(options => 
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 9;
@@ -46,17 +54,23 @@ namespace GameStore.Infrastructure
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserService, UserService>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(opt => {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
+                        RequireExpirationTime = true,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"])),
                         ValidIssuer = configuration["JwtSettings:Issuer"],
                         ValidAudience = configuration["JwtSettings:Audience"],
-                        ValidateIssuer = true,
-                        ValidateAudience = true
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                                           .GetBytes(configuration["JwtSettings:Key"]))
                     };
                 });
 
@@ -76,6 +90,7 @@ namespace GameStore.Infrastructure
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IReadRepositoryBase<SubComment>, SubCommentRepository>();
             services.AddScoped<ISubCommentRepository, SubCommentRepository>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
 
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoCloudService, PhotoCloudService>();

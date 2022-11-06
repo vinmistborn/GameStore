@@ -6,6 +6,7 @@ using GameStore.Application.Contracts.Services.Identity;
 using GameStore.Application.DTOs.Identity;
 using GameStore.Application.DTOs.Photo;
 using GameStore.Application.Extensions.GuardExtensions;
+using GameStore.Application.Specifications.PhotoSpecs;
 using GameStore.Domain.Entities;
 using GameStore.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Http;
@@ -65,6 +66,14 @@ namespace GameStore.Infrastructure.Services.Identity
             var currentUser = _mapper.Map<UserDto>(user);
             currentUser.Token = await _tokenService.GetTokenAsync(user);
             return currentUser;
+        }
+
+        public async Task<UserPhotoDto> GetUserPhotoUrl(int userId)
+        {
+            var userPhoto = await _photoRepository.FirstOrDefaultAsync(new PhotoFilterByUserIdSpec(userId));
+            Guard.Against.NotFound($"{userId}", userPhoto, "user id");
+
+            return _mapper.Map<UserPhotoDto>(userPhoto);
         }
     }
 }

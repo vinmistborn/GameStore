@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32630.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStore.Domain", "GameStore.Domain\GameStore.Domain.csproj", "{6DCE370F-4993-4F32-BBED-5A2DC6AC3C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStore.Domain", "GameStore.Domain\GameStore.Domain.csproj", "{6DCE370F-4993-4F32-BBED-5A2DC6AC3C12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStore.Application", "GameStore.Application\GameStore.Application.csproj", "{040DBD74-5889-445C-BF33-1AE076E66845}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStore.Application", "GameStore.Application\GameStore.Application.csproj", "{040DBD74-5889-445C-BF33-1AE076E66845}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStore.Infrastructure", "GameStore.Infrastructure\GameStore.Infrastructure.csproj", "{80CA450F-D171-42B9-A5EA-28130204ACC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStore.Infrastructure", "GameStore.Infrastructure\GameStore.Infrastructure.csproj", "{80CA450F-D171-42B9-A5EA-28130204ACC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStore.API", "GameStore.API\GameStore.API.csproj", "{07BA6E98-3980-43ED-AB88-1AD3F226ED49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStore.API", "GameStore.API\GameStore.API.csproj", "{07BA6E98-3980-43ED-AB88-1AD3F226ED49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

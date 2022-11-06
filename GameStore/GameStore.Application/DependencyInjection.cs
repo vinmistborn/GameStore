@@ -28,6 +28,7 @@ namespace GameStore.Application
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ISubCommentService, SubCommentService>();
             services.AddScoped<IBaseCommentService<SubCommentDto, SubCommentInfoDto, SubComment>, SubCommentService>();
+            services.AddScoped<IBasketService, BasketService>();
 
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<IAssemblyMarker>();

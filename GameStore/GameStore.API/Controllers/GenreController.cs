@@ -1,5 +1,6 @@
 ﻿using GameStore.Application.Contracts.Services;
 using GameStore.Application.DTOs.Genre;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameStore.API.Controllers
 {
+    [Authorize]
     public class GenreController : BaseController
     {
         public GenreController(IGenreService genreService)

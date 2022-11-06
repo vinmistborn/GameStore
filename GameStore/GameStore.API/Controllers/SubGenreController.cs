@@ -1,12 +1,14 @@
 ﻿using GameStore.Application.Contracts.Services;
 using GameStore.Application.DTOs.Genre;
 using GameStore.Application.Specifications.SubGenreSpecs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GameStore.API.Controllers
 {
+    [Authorize]
     public class SubGenreController : BaseController
     {
         public SubGenreController(ISubGenreService genreService)

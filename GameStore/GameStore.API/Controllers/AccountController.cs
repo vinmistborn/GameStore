@@ -1,6 +1,5 @@
 ﻿using GameStore.Application.Contracts.Services.Identity;
 using GameStore.Application.DTOs.Identity;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -9,20 +8,10 @@ namespace GameStore.API.Controllers
     public class AccountController : BaseController
     {
         private readonly IAccountService _identityService;
-        private readonly IUserService _userService;
         public AccountController(IAccountService identityService,
                                 IUserService userService)
         {
             _identityService = identityService;
-            _userService = userService;
-        }
-
-        [Authorize]
-        [HttpGet]
-        public async Task<ActionResult<UserDto>> GetCurrentUser()
-        {
-            var user = await _userService.GetCurrentUserAsync();
-            return Ok(user);
         }
 
         [HttpPost("register")]

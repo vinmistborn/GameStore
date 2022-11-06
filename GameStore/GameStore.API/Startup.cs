@@ -48,7 +48,7 @@ namespace GameStore.API
 
             app.UseCors(x => x.AllowAnyHeader()
                               .AllowAnyMethod()
-                              .AllowCredentials()
+                              .AllowCredentials()                              
                               .WithOrigins("http://localhost:4200"));
 
             app.UseAuthentication();

@@ -1,12 +1,14 @@
 ﻿using GameStore.Application.Contracts.Services;
 using GameStore.Application.DTOs.Comment.SubComment;
 using GameStore.Application.Specifications.SubCommentSpecs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GameStore.API.Controllers
 {
+    [Authorize]
     public class SubCommentController : BaseController 
     {
         private readonly ISubCommentService _commentService;
